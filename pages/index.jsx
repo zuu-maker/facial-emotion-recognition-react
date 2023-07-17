@@ -18,7 +18,7 @@ const Home = () => {
   });
 
   useEffect(() => {
-    console.log(progress.env.NEXT_PUBLIC_BACKEND);
+    console.log(process.env.NEXT_PUBLIC_BACKEND);
   }, []);
 
   const fileUploadAndPredict = async (e) => {
