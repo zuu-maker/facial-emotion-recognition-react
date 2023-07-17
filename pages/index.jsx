@@ -43,17 +43,24 @@ const Home = () => {
           },
           async () => {
             const url = await storageRef.getDownloadURL();
-            const { data } = await axios.post(
-              `${process.env.NEXT_PUBLIC_BACKEND}predict`,
-              {
-                photo: url,
-              }
-            );
-            setValues({ image: url, emotion: data.emotion });
 
-            setShow(false);
+            try {
+              const { data } = await axios.post(
+                `${process.env.NEXT_PUBLIC_BACKEND}predict`,
+                {
+                  photo: url,
+                }
+              );
+              setValues({ image: url, emotion: data.emotion });
+              setShow(false);
 
-            setProgress(0);
+              setProgress(0);
+            } catch (error) {
+              setValues({ emotion: "Unable to process request" });
+              setShow(false);
+
+              setProgress(0);
+            }
           }
         );
       });
