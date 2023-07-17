@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Resizer from "react-image-file-resizer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { storageBucket } from "../firebase";
 import axios from "axios";
 import UploadFile from "../components/UploadFile";
@@ -16,6 +16,10 @@ const Home = () => {
     image: "",
     emotion: "",
   });
+
+  useEffect(() => {
+    console.log(progress.env.NEXT_PUBLIC_BACKEND);
+  }, []);
 
   const fileUploadAndPredict = async (e) => {
     let files = e.target.files;
