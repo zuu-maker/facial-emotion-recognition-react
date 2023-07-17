@@ -43,9 +43,12 @@ const Home = () => {
           },
           async () => {
             const url = await storageRef.getDownloadURL();
-            const { data } = await axios.post("http://127.0.0.1:8000/predict", {
-              photo: url,
-            });
+            const { data } = await axios.post(
+              `${process.env.NEXT_PUBLIC_BACKEND}predict`,
+              {
+                photo: url,
+              }
+            );
             setValues({ image: url, emotion: data.emotion });
 
             setShow(false);
